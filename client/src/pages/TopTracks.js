@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import TrackCard from './cards/TrackCard';
 
 export default function TopTracks({ accessToken }) {
+
     const [topTracks, setTopTracks] = useState([]);
     console.log(topTracks);
 

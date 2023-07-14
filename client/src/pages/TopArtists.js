@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import ArtistCard from './cards/ArtistCard';
 
 export default function TopArtists({ accessToken }) {
+
     const [topArtists, setTopArtists] = useState([]);
     console.log(topArtists);
 
