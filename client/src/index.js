@@ -1,11 +1,10 @@
+import './index.css';
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import './index.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import TopTracks from './pages/TopTracks';
-import TopArtists from './pages/TopArtists';
-import Dashboard from './Dashboard';
+
+import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
