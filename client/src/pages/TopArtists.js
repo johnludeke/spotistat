@@ -1,7 +1,8 @@
 import React from 'react';
 import SpotifyWebApi from 'spotify-web-api-node';
-import { useState, useEffect } from 'react';
 import ArtistCard from './cards/ArtistCard';
+
+import { useState, useEffect } from 'react';
 
 export default function TopArtists({ accessToken }) {
 
@@ -9,9 +10,9 @@ export default function TopArtists({ accessToken }) {
     console.log(topArtists);
 
     const spotifyApi = new SpotifyWebApi({
-        clientId: "f1873ac026914cb6831c47fc00432b3e",
-        clientSecret: "d48679c7e5b54de09d997515538f7913",
-        redirectUri: "http://localhost:3000"
+        clientId: process.env.REACT_APP_SPOTIFY_CLIENT_ID,
+        clientSecret: process.env.REACT_APP_SPOTIFY_CLIENT_SECRET,
+        redirectUri: process.env.REACT_APP_SPOTIFY_REDIRECT_URI
     });
 
     useEffect(() => {
@@ -20,6 +21,7 @@ export default function TopArtists({ accessToken }) {
         } else {
             spotifyApi.setAccessToken(accessToken);
             spotifyApi.getMyTopArtists().then(data => {
+                console.log(data);
                 let items = data.body.items;
                 items.length = 10;
                 console.log(items);
@@ -39,7 +41,7 @@ export default function TopArtists({ accessToken }) {
 
     return (
         <div>
-            <h1>Top Artists</h1>
+            <h1 className="text-white font-sans font-bold flex justify-center pt-10" >Your top 10 artists of the past 4 months.</h1>
             {topArtists.map(artist => (
                 <ArtistCard
                     key={artist.id}
@@ -50,4 +52,5 @@ export default function TopArtists({ accessToken }) {
             ))}
         </div>
     )
+
 }

@@ -1,7 +1,8 @@
 import React from 'react';
 import SpotifyWebApi from 'spotify-web-api-node';
-import { useState, useEffect } from 'react';
 import TrackCard from './cards/TrackCard';
+
+import { useState, useEffect } from 'react';
 
 export default function TopTracks({ accessToken }) {
 
@@ -9,9 +10,9 @@ export default function TopTracks({ accessToken }) {
     console.log(topTracks);
 
     const spotifyApi = new SpotifyWebApi({
-        clientId: "f1873ac026914cb6831c47fc00432b3e",
-        clientSecret: "d48679c7e5b54de09d997515538f7913",
-        redirectUri: "http://localhost:3000"
+        clientId: process.env.REACT_APP_SPOTIFY_CLIENT_ID,
+        clientSecret: process.env.REACT_APP_SPOTIFY_CLIENT_SECRET,
+        redirectUri: process.env.REACT_APP_SPOTIFY_REDIRECT_URI
     });
 
     useEffect(() => {
@@ -20,6 +21,7 @@ export default function TopTracks({ accessToken }) {
         } else {
             spotifyApi.setAccessToken(accessToken);
             spotifyApi.getMyTopTracks().then(data => {
+                console.log(data);
                 let items = data.body.items;
                 items.length = 10;
                 console.log(items);
@@ -39,7 +41,7 @@ export default function TopTracks({ accessToken }) {
 
     return (
         <div>
-            <h1>Top Tracks</h1>
+            <h1 className="text-white font-sans font-bold flex justify-center pt-5" >Your top 10 tracks of the past 4 months.</h1>
             {topTracks.map(track => (
                 <TrackCard
                     key={track.id}
@@ -50,4 +52,5 @@ export default function TopTracks({ accessToken }) {
             ))}
         </div>
     )
+
 }
